@@ -4,6 +4,6 @@
   register: hostname
   changed_when: false
 
-- name: "Print info"
+- name: "Print info with hostname and config dir"
   debug:
-    msg: "Running setup playbook for hostnames: {{ hostname.stdout }}"
+    msg: "Running setup playbook for hostnames: {{ hostname.stdout }}; for config will be used: {{ CONFIG_DIR }}"
