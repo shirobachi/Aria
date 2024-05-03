@@ -10,7 +10,7 @@ docker-compose up
 
 ### Development check
 ```
-docker run -it --rm -h "ubuntu" $(docker build -f docker/ubuntu/dockerFile . 2>&1| tail -1 | awk '{print $3}') bash -c 'ansible-playbook -i inventory/hosts local.yml && bash -'
+docker run -it --rm -h "ubuntu" $(docker build -f docker/ubuntu/dockerFile . 2>&1| tail -1 | awk '{print $3}') bash -c 'ansible-playbook -i inventory/hosts local.yml; bash -'
 ```
 
 ## Checklists
