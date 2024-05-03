@@ -1,4 +1,9 @@
 ---
-- name: "Hello world"
+- name: Get hostname
+  command: "hostname -f"
+  register: hostname
+  changed_when: false
+
+- name: "Print info"
   debug:
-    msg: "Hello world"
+    msg: "Running setup playbook for hostnames: {{ hostname.stdout }}"
