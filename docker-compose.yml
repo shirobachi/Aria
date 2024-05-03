@@ -1,9 +1,10 @@
 version: '3.8'
 services:
-  ansible-ubuntu:
+  ubuntu:
     build:
       context: ./docker/ubuntu
       dockerfile: dockerFile
+    hostname: ubuntu
     volumes:
       - ./:/ansible:ro
     command: ansible-playbook -i inventory/hosts local.yml
