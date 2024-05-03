@@ -3,7 +3,7 @@ Personal IaC with GitOps first
 
 ## Development
 ### Test
-This will be used by CI/CD (check `.github/workflows/docker-compose.yml`)
+This will be used by CI/CD (check `.github/workflows/test-playbooks.yml`)
 ```bash
 docker-compose up
 ```
