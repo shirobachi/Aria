@@ -19,4 +19,4 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Build and run Docker Compose
-        run: docker-compose up -d
+        run: docker-compose up
