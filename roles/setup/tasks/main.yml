@@ -6,4 +6,7 @@
 
 - name: "Print info with hostname and config dir"
   debug:
-    msg: "Running setup playbook for hostnames: {{ hostname.stdout }}; for config will be used: {{ CONFIG_DIR }}"
+    msg: "Running setup playbook for hostnames: {{ hostname.stdout }}"
+
+- name: Setup config file
+  include_tasks: setup_config_file.yml
