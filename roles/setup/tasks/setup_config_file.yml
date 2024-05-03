@@ -1,0 +1,31 @@
+- name: setup | default_config | create .config directory
+  ansible.builtin.file:
+    path: "{{ CONFIG_DIR }}"
+    state: directory
+
+- debug:
+    msg: "Creating config file in {{ CONFIG_FILE }}"
+
+# - name: setup | default_config | create aria config file
+#   ansible.builtin.file:
+#     path: "{{ CONFIG_FILE }}"
+#     state: file
+
+
+
+- name: setup | default_config | add keys to config file
+  block:
+    - name: setup | default_config | add keys to config file | grep
+      ansible.builtin.command: "grep '^OPS_BRANCH:' {{ ansible_user_dir }}/.config/{{ OPT_CONFIG_FILENAME }}"
+      register: ops_branch_check
+      failed_when: false
+      changed_when: false
+      ignore_errors: true
+
+    - name: setup | default_config | add keys to config file | lineinfile
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_user_dir }}/.config/{{ OPT_CONFIG_FILENAME }}"
+        line: "OPS_BRANCH: master"
+        state: present
+        create: yes
+      when: ops_branch_check.rc != 0
