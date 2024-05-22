@@ -4,7 +4,12 @@
   register: hostname
   changed_when: false
 
-- name: "Print info with hostname and config dir"
+- name: "Print info about variables what this role will use"
   debug:
-    msg: "Running setup playbook for hostnames: {{ hostname.stdout }}"
+    msg: "{{ item.key }}: {{ item.value }}"
 
+  loop:
+    - { key: "hostname", value: "{{ hostname.stdout }}" }
+    - { key: "ansible_user_dir", value: "{{ ansible_user_dir }}" }
+    - { key: "CONFIG_DIR", value: "{{ CONFIG_DIR }}" }
+    - { key: "CONFIG_FILE", value: "{{ CONFIG_FILE }}" }
