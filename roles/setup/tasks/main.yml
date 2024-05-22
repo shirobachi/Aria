@@ -13,3 +13,16 @@
     - { key: "ansible_user_dir", value: "{{ ansible_user_dir }}" }
     - { key: "CONFIG_DIR", value: "{{ CONFIG_DIR }}" }
     - { key: "CONFIG_FILE", value: "{{ CONFIG_FILE }}" }
+
+- name: "Create config directory"
+  file:
+    path: "{{ CONFIG_DIR }}"
+    state: directory
+    mode: 0755
+
+- name: "Create config file"
+  file:
+    path: "{{ CONFIG_FILE }}"
+    state: touch
+    mode: 0644
+
