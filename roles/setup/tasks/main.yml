@@ -20,25 +20,11 @@
     state: directory
     mode: 0755
 
-- name: "Create config file"
-  file:
-    path: "{{ CONFIG_FILE }}"
-    state: touch
-    mode: 0644
-
-- name: setup | default_config | add keys to config file
-  block:
-    - name: setup | default_config | add keys to config file | grep
-      ansible.builtin.command: "grep '^OPS_BRANCH:' {{ CONFIG_FILE }}"
-      register: ops_branch_check
-      failed_when: false
-      changed_when: false
-      ignore_errors: true
-
-    - name: setup | default_config | add keys to config file | lineinfile
-      ansible.builtin.lineinfile:
-        path: "{{ CONFIG_FILE }}"
-        line: "OPS_BRANCH: master"
-        state: present
-        create: yes
-      when: ops_branch_check.rc != 0
+- name: "Add keys to config file"
+  include_tasks: add_keys.yml
+  vars:
+    item_key: "{{ item.key }}"
+    item_value: "{{ item.value }}"
+  loop:
+    - { key: "OPS_BRANCH", value: "master" }
+    - { key: "OPS_REPO", value: "git@github.com:shirobachi/Aria.git" }
