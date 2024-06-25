@@ -3,3 +3,4 @@ CONFIG_DIR: "{{ ansible_user_dir }}/.config"
 CONFIG_FILE: "{{ CONFIG_DIR }}/aria"
 
 IS_SERVER: "True"
+procsversion: "0.14.5"

@@ -1,0 +1,29 @@
+- name: Install ripgrep
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: ripgrep
+
+- name: Install procs in Arch/Fedora
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: procs
+  tags: procs
+  when: ansible_os_family != 'Debian'
+
+- name: Install unzip
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: unzip
+  when: IS_SERVER == "False"
+
+- name: Install procs in Ubuntu
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/dalance/procs/releases/download/v{{ procsversion }}/procs-v{{ procsversion }}-{{ ansible_userspace_architecture }}-linux.zip"
+    dest: /usr/local/bin
+    remote_src: true
+  tags: procs
+  when: ansible_os_family == 'Debian'

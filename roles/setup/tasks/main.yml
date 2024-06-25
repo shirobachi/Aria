@@ -5,3 +5,6 @@
 
 - name: Install fonts
   ansible.builtin.include_tasks: fonts.yml
+
+- name: Install tools
+  ansible.builtin.include_tasks: tools.yml
