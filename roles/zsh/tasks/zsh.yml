@@ -1,0 +1,12 @@
+- name: Ensure Zsh with dependencies are installed
+  ansible.builtin.package:
+    name: "{{ ['zsh'] + zsh_dependencies }}"
+    state: present
+    update_cache: yes
+
+  become: true
+- name: Ensure zsh is the default shell
+  user:
+    name: "{{ ansible_user }}"
+    shell: "/usr/bin/zsh"
+  become: true

@@ -1,0 +1,5 @@
+- name: Install zsh
+  include_tasks: zsh.yml
+
+- name: Install oh-my-zsh
+  include_tasks: oh-my-zsh.yml
