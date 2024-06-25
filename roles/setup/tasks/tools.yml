@@ -22,8 +22,27 @@
 - name: Install procs in Ubuntu
   become: true
   ansible.builtin.unarchive:
-    src: "https://github.com/dalance/procs/releases/download/v{{ procsversion }}/procs-v{{ procsversion }}-{{ ansible_userspace_architecture }}-linux.zip"
+    src: "https://github.com/dalance/procs/releases/download/{{ procsversion }}/procs-{{ procsversion }}-{{ ansible_userspace_architecture }}-linux.zip"
     dest: /usr/local/bin
     remote_src: true
   tags: procs
   when: ansible_os_family == 'Debian'
+
+- name: Install dust on Arch
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: dust
+  when: ansible_os_family == 'Archlinux'
+
+- name: Install dust on Ubuntu/Fedora
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/bootandy/dust/releases/download/{{ dustversion }}/dust-{{ dustversion }}-{{ ansible_userspace_architecture }}-unknown-linux-gnu.tar.gz"
+    dest: /usr/local/bin
+    extra_opts:
+    - --strip=1
+    - --wildcards
+    - '*/dust'
+    remote_src: true
+  when: ansible_os_family != 'Archlinux'
