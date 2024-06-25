@@ -1,16 +1,17 @@
+---
 - name: Add keys to config file
   block:
-  - name: "Check if key exists"
-    ansible.builtin.command: "grep '^{{item.key}}:' {{ CONFIG_FILE }}"
-    register: ops_branch_check
-    failed_when: false
-    changed_when: false
-    ignore_errors: true
+    - name: Check if key exists
+      ansible.builtin.command: grep '^{{item.key}}:' {{ CONFIG_FILE }}
+      register: ops_branch_check
+      failed_when: false
+      changed_when: false
+      ignore_errors: true
 
-  - name: "Add key to config file"
-    ansible.builtin.lineinfile:
-      path: "{{ CONFIG_FILE }}"
-      line: "{{item.key}}: {{item.value}}"
-      state: present
-      create: yes
-    when: ops_branch_check.rc != 0
+    - name: Add key to config file
+      ansible.builtin.lineinfile:
+        path: "{{ CONFIG_FILE }}"
+        line: "{{ item.key }}: {{ item.value }}"
+        state: present
+        create: true
+      when: ops_branch_check.rc != 0

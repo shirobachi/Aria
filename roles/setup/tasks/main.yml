@@ -1,6 +1,7 @@
-- name: zsh
-  include_role:
+---
+- name: Zsh
+  ansible.builtin.include_role:
     name: zsh
 
 - name: Install fonts
-  include_tasks: fonts.yml
+  ansible.builtin.include_tasks: fonts.yml
