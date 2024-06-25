@@ -1,0 +1,18 @@
+- name: Override powerline fonts package name for Debian.
+  ansible.builtin.set_fact:
+    powerlinefonts: fonts-powerline
+  when: ansible_os_family == 'Debian'
+  when: IS_SERVER == "False"
+
+- name: Override fd-find package name for Archlinux.
+  ansible.builtin.set_fact:
+    fdfind: fd
+  when: ansible_os_family == 'Archlinux'
+  when: IS_SERVER == "False"
+
+- name: Install Powerline fonts
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ powerlinefonts }}"
+  when: IS_SERVER == "False"
