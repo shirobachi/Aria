@@ -2,6 +2,7 @@
 - name: Ping site
   shell: ping -c 1 -w 2 google.com
   register: ping_result
+  changed_when: false
 
 - name: Ping result
   debug:
