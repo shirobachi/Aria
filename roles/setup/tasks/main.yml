@@ -1,11 +1,11 @@
 ---
-- name: Zsh
-  ansible.builtin.include_role:
-    name: zsh
-
 - name: Install fonts
   ansible.builtin.include_tasks: fonts.yml
   when: IS_SERVER == "False"
 
 - name: Install tools
   ansible.builtin.include_tasks: tools.yml
+
+- name: Zsh
+  ansible.builtin.include_role:
+    name: zsh
