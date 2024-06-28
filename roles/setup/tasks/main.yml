@@ -5,6 +5,7 @@
 
 - name: Install fonts
   ansible.builtin.include_tasks: fonts.yml
+  when: IS_SERVER == "False"
 
 - name: Install tools
   ansible.builtin.include_tasks: tools.yml
