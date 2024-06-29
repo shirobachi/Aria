@@ -9,3 +9,8 @@
 - name: Zsh
   ansible.builtin.include_role:
     name: zsh
+
+- name: "set timezone to TIMEZONE"
+  timezone:
+    name: "{{ TIMEZONE }}"
+  tags: timezone, tz

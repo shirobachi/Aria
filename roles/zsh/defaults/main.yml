@@ -1,1 +1,5 @@
 zsh_dependencies: []
+omz_repos:
+  - "zsh-autosuggestions"
+  - "zsh-completions"
+  - "zsh-syntax-highlighting"
