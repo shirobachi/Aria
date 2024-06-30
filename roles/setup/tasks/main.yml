@@ -5,8 +5,13 @@
 
 - name: Install tools
   ansible.builtin.include_tasks: tools.yml
-  
+
 - name: "set timezone to TIMEZONE"
   timezone:
     name: "{{ TIMEZONE }}"
   tags: timezone, tz
+
+- name: "Include role geerlingguy.docker"
+  ansible.builtin.import_role:
+    name: geerlingguy.docker
+  tags: docker

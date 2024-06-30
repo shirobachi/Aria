@@ -2,5 +2,4 @@
   roles:
   - setup
   - zsh
-  - geerlingguy.docker
   
