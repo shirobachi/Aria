@@ -5,11 +5,7 @@
 
 - name: Install tools
   ansible.builtin.include_tasks: tools.yml
-
-- name: Zsh
-  ansible.builtin.include_role:
-    name: zsh
-
+  
 - name: "set timezone to TIMEZONE"
   timezone:
     name: "{{ TIMEZONE }}"
