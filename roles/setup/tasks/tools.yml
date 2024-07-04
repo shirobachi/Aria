@@ -69,11 +69,19 @@
     remote_src: true
   when: ansible_os_family != 'Archlinux' and dust_rc.rc != 0
 
-- name: Install exa
+- name: Install exa (debian)
   become: true
   ansible.builtin.package:
     state: present
     name: exa
+  when: ansible_os_family == 'Debian'
+
+- name: Install eza (arch)
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: eza
+  when: ansible_os_family == 'Archlinux'
 
 - name: Override fd-find package name for Archlinux.
   ansible.builtin.set_fact:
