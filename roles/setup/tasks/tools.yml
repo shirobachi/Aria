@@ -76,12 +76,46 @@
     name: exa
   when: ansible_os_family == 'Debian'
 
-- name: Install eza (arch)
-  become: true
-  ansible.builtin.package:
-    state: present
-    name: eza
-  when: ansible_os_family == 'Archlinux'
+- name: Install exa on Arch Linux
+  block:
+    - name: Ensure base-devel is installed
+      pacman:
+        name: base-devel
+        state: present
+      become: true
+
+    - name: Check if yay is installed
+      command: which yay
+      register: yay_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Install yay if not present
+      block:
+        - name: Clone yay repository
+          git:
+            repo: https://aur.archlinux.org/yay.git
+            dest: /tmp/yay
+          become: true
+          become_user: "{{ ansible_user_id }}"
+
+        - name: Build and install yay
+          command: makepkg -si --noconfirm
+          args:
+            chdir: /tmp/yay
+          become: true
+          become_user: "{{ ansible_user_id }}"
+      when: yay_check.rc != 0
+
+    - name: Install exa using yay
+      command: yay -S exa --noconfirm
+      become: true
+      become_user: "{{ ansible_user_id }}"
+
+  rescue:
+    - name: Inform about failure
+      debug:
+        msg: "Failed to install exa. Please check your system and try again."
 
 - name: Override fd-find package name for Archlinux.
   ansible.builtin.set_fact:
