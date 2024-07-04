@@ -108,15 +108,15 @@
           become_user: "{{ ansible_user_id }}"
       when: yay_check.rc != 0
 
-    - name: Install exa using yay
-      command: yay -S exa --noconfirm
+    - name: Install eza using yay
+      command: yay -S eza --noconfirm
       become: true
       become_user: "{{ ansible_user_id }}"
 
   rescue:
     - name: Inform about failure
       debug:
-        msg: "Failed to install exa. Please check your system and try again."
+        msg: "Failed to install eza. Please check your system and try again."
 
 - name: Override fd-find package name for Archlinux.
   ansible.builtin.set_fact:
