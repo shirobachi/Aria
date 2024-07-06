@@ -1,4 +1,11 @@
 ---
+- name: Update system
+  become: true
+  ansible.builtin.package:
+    state: latest
+    name: "*"
+    update_cache: yes
+
 - name: Install fonts
   ansible.builtin.include_tasks: fonts.yml
   when: IS_SERVER == "False"
