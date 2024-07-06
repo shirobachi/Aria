@@ -1,3 +1,10 @@
+- name: Update system
+  become: true
+  ansible.builtin.package:
+    state: latest
+    name: "*"
+    update_cache: yes
+
 - name: Install ripgrep
   become: true
   ansible.builtin.package:
@@ -107,6 +114,11 @@
           become: true
           become_user: "{{ ansible_user_id }}"
       when: yay_check.rc != 0
+
+    - name: Update repositories
+      command: yay -Syu --noconfirm
+      become: true
+      become_user: "{{ ansible_user_id }}"
 
     - name: Install eza using yay
       command: yay -S eza --noconfirm
