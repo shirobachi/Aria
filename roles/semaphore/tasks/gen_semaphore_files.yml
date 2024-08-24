@@ -1,0 +1,15 @@
+---
+- debug: { var: SEMAPHORE_PATH }
+
+- name: Make docker-compose.yml directory
+  file:
+    path: "{{ SEMAPHORE_PATH }}"
+    state: directory
+  tags: semaphore
+
+- name: Generate docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ SEMAPHORE_PATH }}/docker-compose.yml"
+  notify: Restart Semaphore
+  tags: semaphore
