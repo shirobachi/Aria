@@ -1,0 +1,4 @@
+---
+BASE_PATH: "/opt"
+NASE_NAME: "semaphore"
+PATH: "${BASE_PATH}/${NAME}"
