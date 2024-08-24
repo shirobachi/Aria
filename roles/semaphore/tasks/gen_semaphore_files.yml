@@ -15,3 +15,4 @@
   tags: semaphore
 
 - include_tasks: gen_semaphore_envs.yml
+  notify: Restart Semaphore
