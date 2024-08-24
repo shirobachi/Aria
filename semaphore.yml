@@ -4,5 +4,6 @@
   vars:
     docker_users:
       - pi
+  tags: semaphore
   roles:
     - semaphore
