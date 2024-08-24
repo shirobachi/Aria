@@ -1,0 +1,8 @@
+---
+- hosts: raspberrypi
+  become: yes
+  vars:
+    docker_users:
+      - pi
+  roles:
+    - semaphore
