@@ -1,0 +1,14 @@
+---
+- set_fact: { GREP_REGEX: "SEMAPHORE_ADMIN_PASSWORD=.*"}
+- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
+
+- name: Register grep in GREP_FILE the GREP_REGEX
+  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
+  register: GREP_RESULT
+  ignore_errors: true
+  changed_when: false
+
+- name: Generate password for SEMAPHORE_ADMIN_PASSWORD
+  ansible.builtin.shell: echo "SEMAPHORE_ADMIN_PASSWORD=$(cat /dev/urandom | tr -dc a-zA-Z0-9 | head -c64; echo)" >> "{{ GREP_FILE }}"
+  notify: Restart Semaphore
+  when: GREP_RESULT.stdout == ""
