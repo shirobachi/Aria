@@ -1,3 +1,7 @@
 ---
 - include_role: { name: install_docker }
 - include_tasks: gen_semaphore_files.yml
+
+- name: Make sure Semaphore running
+  community.docker.docker_compose_v2:
+    project_src: "{{ SEMAPHORE_PATH }}"
