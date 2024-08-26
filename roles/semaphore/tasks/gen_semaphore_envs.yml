@@ -53,3 +53,17 @@
 - name: Set SEMAPHORE_ADMIN_DOMAIN to ansible_hostname
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_DOMAIN={{ ansible_hostname }}" >> "{{ GREP_FILE }}"
   when: GREP_RESULT.stdout == ""
+
+
+- set_fact: { GREP_REGEX: "SEMAPHORE_ACCESS_KEY_ENCRYPTION=.*"}
+- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
+
+- name: Register grep in GREP_FILE the GREP_REGEX
+  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
+  register: GREP_RESULT
+  ignore_errors: true
+  changed_when: false
+
+- name: Generate SEMAPHORE_ACCESS_KEY_ENCRYPTION with /dev/random 
+  ansible.builtin.shell: echo "SEMAPHORE_ACCESS_KEY_ENCRYPTION=$(head -c32 /dev/urandom | base64)" >> "{{ GREP_FILE }}"
+  when: GREP_RESULT.stdout == ""
