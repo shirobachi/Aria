@@ -1,0 +1,3 @@
+- name: install_docker
+  src: git+https://github.com/geerlingguy/ansible-role-docker.git
+  version: 7.3.0
