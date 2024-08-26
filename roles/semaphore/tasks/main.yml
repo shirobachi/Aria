@@ -1,5 +1,4 @@
 ---
-- include_role: { name: install_docker }
 - include_tasks: gen_semaphore_files.yml
 
 - name: Make sure Semaphore running

@@ -2,8 +2,6 @@
 - hosts: raspberrypi
   become: yes
   vars:
-    docker_users:
-      - pi
     SEMAPHORE_ADMIN_NAME: "foxy"
   tags: semaphore
   roles:
