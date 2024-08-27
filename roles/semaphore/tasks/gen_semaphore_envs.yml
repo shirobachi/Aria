@@ -1,69 +1,44 @@
 ---
-- set_fact: { GREP_REGEX: "SEMAPHORE_ADMIN_PASSWORD=.*"}
-- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
-
-- name: Register grep in GREP_FILE the GREP_REGEX
-  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
-  register: GREP_RESULT
-  ignore_errors: true
-  changed_when: false
+- include_tasks: _register_grep_in_grep_file
+  vars:
+    grep_regex: "SEMAPHORE_PORT=.*"
 
 - name: Generate password for SEMAPHORE_ADMIN_PASSWORD
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_PASSWORD=$(cat /dev/urandom | tr -dc a-zA-Z0-9 | head -c64; echo)" >> "{{ GREP_FILE }}"
-  when: GREP_RESULT.stdout == ""
+  when: grep_result.stdout == ""
 
 
-- set_fact: { GREP_REGEX: "SEMAPHORE_PORT=.*"}
-- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
-
-- name: Register grep in GREP_FILE the GREP_REGEX
-  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
-  register: GREP_RESULT
-  ignore_errors: true
-  changed_when: false
+- include_tasks: _register_grep_in_grep_file
+  vars:
+    grep_regex: "SEMAPHORE_PORT=.*"
 
 - name: Add default 3000 port to SEMAPHORE_PORT
   ansible.builtin.shell: echo "SEMAPHORE_PORT=3000" >> "{{ GREP_FILE }}"
-  when: GREP_RESULT.stdout == ""
+  when: grep_result.stdout == ""
 
 
-- set_fact: { GREP_REGEX: "SEMAPHORE_ADMIN_NAME=.*"}
-- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
-
-- name: Register grep in GREP_FILE the GREP_REGEX
-  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
-  register: GREP_RESULT
-  ignore_errors: true
-  changed_when: false
+- include_tasks: _register_grep_in_grep_file
+  vars:
+    grep_regex: "SEMAPHORE_ADMIN_NAME=.*"
 
 - name: Set SEMAPHORE_ADMIN_NAME to ansible_user
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_NAME={{ SEMAPHORE_ADMIN_NAME | default(ansible_user) }}" >> "{{ GREP_FILE }}"
-  when: GREP_RESULT.stdout == ""
+  when: grep_result.stdout == ""
 
 
-- set_fact: { GREP_REGEX: "SEMAPHORE_ADMIN_DOMAIN=.*"}
-- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
-
-- name: Register grep in GREP_FILE the GREP_REGEX
-  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
-  register: GREP_RESULT
-  ignore_errors: true
-  changed_when: false
+- include_tasks: _register_grep_in_grep_file
+  vars:
+    grep_regex: "SEMAPHORE_ADMIN_DOMAIN=.*"
 
 - name: Set SEMAPHORE_ADMIN_DOMAIN to ansible_hostname
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_DOMAIN={{ ansible_hostname }}" >> "{{ GREP_FILE }}"
-  when: GREP_RESULT.stdout == ""
+  when: grep_result.stdout == ""
 
 
-- set_fact: { GREP_REGEX: "SEMAPHORE_ACCESS_KEY_ENCRYPTION=.*"}
-- set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
-
-- name: Register grep in GREP_FILE the GREP_REGEX
-  ansible.builtin.shell: grep -oE "{{ GREP_REGEX }}" "{{ GREP_FILE }}"
-  register: GREP_RESULT
-  ignore_errors: true
-  changed_when: false
+- include_tasks: _register_grep_in_grep_file
+  vars:
+    grep_regex: "SEMAPHORE_ACCESS_KEY_ENCRYPTION=.*"
 
 - name: Generate SEMAPHORE_ACCESS_KEY_ENCRYPTION with /dev/random 
   ansible.builtin.shell: echo "SEMAPHORE_ACCESS_KEY_ENCRYPTION=$(head -c32 /dev/urandom | base64)" >> "{{ GREP_FILE }}"
-  when: GREP_RESULT.stdout == ""
+  when: grep_result.stdout == ""
