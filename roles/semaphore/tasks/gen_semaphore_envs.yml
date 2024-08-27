@@ -3,7 +3,7 @@
   vars:
     grep_regex: "SEMAPHORE_PORT=.*"
 
-- name: Generate password for SEMAPHORE_ADMIN_PASSWORD
+- name: gen_semaphore_envs | Generate password for SEMAPHORE_ADMIN_PASSWORD
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_PASSWORD=$(cat /dev/urandom | tr -dc a-zA-Z0-9 | head -c64; echo)" >> "{{ GREP_FILE }}"
   when: grep_result.stdout == ""
 
@@ -12,7 +12,7 @@
   vars:
     grep_regex: "SEMAPHORE_PORT=.*"
 
-- name: Add default 3000 port to SEMAPHORE_PORT
+- name: gen_semaphore_envs | Add default 3000 port to SEMAPHORE_PORT
   ansible.builtin.shell: echo "SEMAPHORE_PORT=3000" >> "{{ GREP_FILE }}"
   when: grep_result.stdout == ""
 
@@ -21,7 +21,7 @@
   vars:
     grep_regex: "SEMAPHORE_ADMIN_NAME=.*"
 
-- name: Set SEMAPHORE_ADMIN_NAME to ansible_user
+- name: gen_semaphore_envs | Set SEMAPHORE_ADMIN_NAME to ansible_user
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_NAME={{ SEMAPHORE_ADMIN_NAME | default(ansible_user) }}" >> "{{ GREP_FILE }}"
   when: grep_result.stdout == ""
 
@@ -30,7 +30,7 @@
   vars:
     grep_regex: "SEMAPHORE_ADMIN_DOMAIN=.*"
 
-- name: Set SEMAPHORE_ADMIN_DOMAIN to ansible_hostname
+- name: gen_semaphore_envs | Set SEMAPHORE_ADMIN_DOMAIN to ansible_hostname
   ansible.builtin.shell: echo "SEMAPHORE_ADMIN_DOMAIN={{ ansible_hostname }}" >> "{{ GREP_FILE }}"
   when: grep_result.stdout == ""
 
@@ -39,6 +39,6 @@
   vars:
     grep_regex: "SEMAPHORE_ACCESS_KEY_ENCRYPTION=.*"
 
-- name: Generate SEMAPHORE_ACCESS_KEY_ENCRYPTION with /dev/random 
+- name: gen_semaphore_envs | Generate SEMAPHORE_ACCESS_KEY_ENCRYPTION with /dev/random 
   ansible.builtin.shell: echo "SEMAPHORE_ACCESS_KEY_ENCRYPTION=$(head -c32 /dev/urandom | base64)" >> "{{ GREP_FILE }}"
   when: grep_result.stdout == ""

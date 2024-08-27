@@ -1,6 +1,6 @@
 - set_fact: { GREP_FILE: "{{ SEMAPHORE_PATH }}/.env" }
 
-- name: Register grep in GREP_FILE the grep_regex
+- name: _register_grep_in_grep_file | Register grep in GREP_FILE the grep_regex
   ansible.builtin.shell: grep -oE "{{ grep_regex }}" "{{ GREP_FILE }}"
   register: grep_result
   ignore_errors: true
