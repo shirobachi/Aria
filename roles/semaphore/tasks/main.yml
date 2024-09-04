@@ -1,6 +1,18 @@
 ---
 - include_tasks: gen_semaphore_files.yml
+  when: SEMAPHORE_STATE == "present"
+
+- name: Make sure Semaphore stopped
+  community.docker.docker_compose_v2:
+    project_src: "{{ SEMAPHORE_PATH }}"
+    state: stopped
+  when: SEMAPHORE_STATE == "absent"
+
+- include_tasks: remove_semaphore_files.yml
+  when: SEMAPHORE_STATE == "absent"
 
 - name: Make sure Semaphore running
   community.docker.docker_compose_v2:
     project_src: "{{ SEMAPHORE_PATH }}"
+    state: present
+  when: SEMAPHORE_STATE == "present"

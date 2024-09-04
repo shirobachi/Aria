@@ -1,0 +1,5 @@
+- name: Remove whole SEMAPHORE_PATH
+  file:
+    path: "{{ SEMAPHORE_PATH }}"
+    state: absent
+  when: SEMAPHORE_STATE == "absent"
