@@ -1,5 +1,5 @@
 - hosts: all
   roles:
   # - setup
-  - zsh
-  - install_docker
+  # - zsh
+  # - install_docker
