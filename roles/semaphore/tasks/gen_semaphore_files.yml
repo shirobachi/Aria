@@ -1,13 +1,13 @@
 ---
 - debug: { var: SEMAPHORE_PATH }
 
-- name: gen_semaphore_files | Make directory for semaphore
+- name: Make directory for semaphore
   file:
     path: "{{ SEMAPHORE_PATH }}"
     state: directory
   tags: semaphore
 
-- name: gen_semaphore_files | Generate docker-compose.yml
+- name: Generate docker-compose.yml
   template:
     src: docker-compose.yml.j2
     dest: "{{ SEMAPHORE_PATH }}/docker-compose.yml"
