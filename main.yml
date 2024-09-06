@@ -3,6 +3,11 @@
   # - setup
   # - zsh
   # - install_docker
+
+- hosts: [raspberrypi]
+  roles:
+    - semaphore
+
 - hosts: [mikrus]
   roles:
     - n8n
