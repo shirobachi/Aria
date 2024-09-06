@@ -3,3 +3,6 @@
   # - setup
   # - zsh
   # - install_docker
+- hosts: [mikrus]
+  roles:
+    - n8n
