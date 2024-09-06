@@ -1,0 +1,16 @@
+- name: Make sure dir is created
+  file:
+    path: "{{ n8n_path }}"
+    state: directory
+  tags: n8n
+  when: n8n_state
+
+- name: Generate docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ n8n_path }}/docker-compose.yml"
+  tags: n8n
+  when: n8n_state
+
+- import_tasks: gen_n8n_envs.yml
+  when: n8n_state
