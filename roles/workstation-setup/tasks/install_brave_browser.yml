@@ -1,5 +1,6 @@
 ---
 - name: Add Brave browser repository
+  become: true
   yum_repository:
     name: Brave
     description: Brave Browser YUM repo
