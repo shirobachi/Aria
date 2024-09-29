@@ -11,3 +11,8 @@
 - hosts: [mikrus]
   roles:
     - n8n
+
+- hosts: [ workstation ]
+  roles:
+    - workstation-setup
+
