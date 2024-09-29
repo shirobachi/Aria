@@ -1,1 +1,5 @@
 # - name: Restart n8n
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded

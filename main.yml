@@ -9,6 +9,9 @@
     - semaphore
 
 - hosts: [mikrus]
+  vars:
+    n8n_domain: n8n.hryszko.dev
+    n8n_port: 20107
   roles:
     - n8n
 

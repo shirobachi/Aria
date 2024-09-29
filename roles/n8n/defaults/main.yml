@@ -3,3 +3,5 @@ n8n_state: present # present,
 n8n_base_path: "/opt"
 n8n_base_name: "n8n"
 n8n_path: "{{ n8n_base_path }}/{{ n8n_base_name }}"
+
+n8n_domain: "n8n.your-domain.com"

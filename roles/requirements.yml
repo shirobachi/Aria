@@ -5,3 +5,7 @@
 - name: install_n8n
   src: git+https://github.com/kinduff/ansible-docker-n8n.git
   version: v1.4.2
+
+- name: ngnix
+  src: git+https://github.com/nginxinc/ansible-role-nginx.git
+  version: 0.24.3
