@@ -3,7 +3,7 @@
   when: n8n_state == "present"
 
 - name: Create /etc/nginx/sites-available dir
-  file:
+  ansible.builtin.file:
     path: /etc/nginx/sites-available
     state: directory
   when: n8n_state == "present"

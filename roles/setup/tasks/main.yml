@@ -14,6 +14,7 @@
   ansible.builtin.include_tasks: tools.yml
 
 - name: "set timezone to TIMEZONE"
+  become: true
   timezone:
     name: "{{ TIMEZONE }}"
   tags: timezone, tz
