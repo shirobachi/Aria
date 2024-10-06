@@ -2,7 +2,7 @@
 - debug: { var: SEMAPHORE_PATH }
 
 - name: Make directory for semaphore
-  file:
+  ansible.builtin.file:
     path: "{{ SEMAPHORE_PATH }}"
     state: directory
   tags: semaphore

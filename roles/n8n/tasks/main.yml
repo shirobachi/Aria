@@ -17,13 +17,13 @@
   when: n8n_state == "present"
 
 - name: Create /etc/nginx/sites-enabled dir
-  file:
+  ansible.builtin.file:
     path: /etc/nginx/sites-enabled
     state: directory
   when: n8n_state == "present"
 
 - name: Enable nginx config
-  file:
+  ansible.builtin.file:
     src: "/etc/nginx/sites-available/{{ n8n_domain }}"
     dest: "/etc/nginx/sites-enabled/{{ n8n_domain }}"
     state: link
