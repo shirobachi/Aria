@@ -1,4 +1,5 @@
 ---
 - hosts: all
-  tasks:
+  roles:
+    - ansible-role-workstation
     - ansible.builtin.ping:
