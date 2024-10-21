@@ -1,2 +1,6 @@
 ---
+- name: Run ping role
+  hosts: all
+  roles:
+    - ping
 - 
