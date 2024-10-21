@@ -1,7 +1,0 @@
-- set_fact: { _grep_file: "{{ n8n_path }}/.env" }
-- set_fact: { _grep_regex: "n8n_port=.*" }
-- import_tasks: roles/semaphore/tasks/_register_grep_in_grep_file.yml
-
-- name: add default 5678 port to n8n_port env
-  ansible.builtin.shell: echo "n8n_port=5678" >> "{{ _grep_file }}"
-  when: _grep_result.stdout == ""

@@ -1,8 +1,0 @@
----
-- hosts: [raspberrypi, mikrus]
-  become: yes
-  vars:
-    SEMAPHORE_ADMIN_NAME: "foxy"
-  tags: semaphore
-  roles:
-    - semaphore

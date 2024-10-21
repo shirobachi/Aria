@@ -1,5 +1,0 @@
-dependencies:
-  - role: install_docker
-    vars:
-      docker_users:
-        - pi

@@ -1,6 +1,0 @@
----
-- name: Install zsh
-  ansible.builtin.include_tasks: zsh.yml
-
-- name: Install oh-my-zsh
-  ansible.builtin.include_tasks: oh-my-zsh.yml

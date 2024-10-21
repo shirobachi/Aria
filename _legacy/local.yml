@@ -1,6 +1,0 @@
----
-- hosts:
-    - localhost
-    - all
-  roles:
-    - role: setup

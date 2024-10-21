@@ -1,5 +1,0 @@
-- name: Remove whole SEMAPHORE_PATH
-  ansible.builtin.file:
-    path: "{{ SEMAPHORE_PATH }}"
-    state: absent
-  when: SEMAPHORE_STATE == "absent"

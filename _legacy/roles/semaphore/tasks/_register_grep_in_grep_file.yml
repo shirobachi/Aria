@@ -1,5 +1,0 @@
-- name: Run grep check with grep regex {{ _grep_regex }}
-  ansible.builtin.shell: grep -oE "{{ _grep_regex }}" "{{ _grep_file }}"
-  register: _grep_result
-  ignore_errors: true
-  changed_when: false

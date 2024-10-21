@@ -1,3 +1,0 @@
-- hosts: all
-  roles:
-    - setup_ansible_usr
