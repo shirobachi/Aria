@@ -1,5 +1,6 @@
 ---
-- name: Run ping role
+- name: Ping all hosts
   hosts: all
-  roles:
-    - ping
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:
