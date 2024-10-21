@@ -9,3 +9,4 @@
 - name: ngnix
   src: git+https://github.com/nginxinc/ansible-role-nginx.git
   version: 0.24.3
+
